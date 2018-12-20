@@ -11,6 +11,8 @@
 #import "CPTUtilities.h"
 #import "CPTXYPlotSpace.h"
 #import "NSCoderExtensions.h"
+#import "CPTMutableLineStyle.h"
+#import "CPTColor.h"
 #import <tgmath.h>
 
 /// @cond
@@ -479,11 +481,33 @@
             // Add grid line
             CGContextMoveToPoint(context, startViewPoint.x, startViewPoint.y);
             CGContextAddLineToPoint(context, endViewPoint.x, endViewPoint.y);
-        }
+         
+            // This is to make the 0 tickLine of an y-axis with negative values a different color.
+            double lowestTick = 0;
+            for (NSNumber *num in [locations allObjects]) {
+                double x = num.doubleValue;
+                if (x < lowestTick) lowestTick = x;
+            }
 
-        // Stroke grid lines
-        [lineStyle setLineStyleInContext:context];
-        [lineStyle strokePathInContext:context];
+            if (location.doubleValue == 0 && lowestTick < 0) {
+                CPTMutableLineStyle *mutalbleZeroLineStyle = [[CPTMutableLineStyle alloc] init];
+                // This should match the zero line color in the UIColor Extension.
+                CPTColor *color = [[CPTColor alloc] initWithComponentRed:102/255 green:102/255 blue:102/255 alpha:1.0];
+                [mutalbleZeroLineStyle setLineColor: color];
+                CPTLineStyle *zeroLineStyle = [CPTLineStyle lineStyleWithStyle:mutalbleZeroLineStyle];
+                [zeroLineStyle setLineStyleInContext:context];
+                [zeroLineStyle strokePathInContext:context];
+            } else {
+                [lineStyle setLineStyleInContext:context];
+                [lineStyle strokePathInContext:context];
+
+            }
+         }
+ 
+         // Stroke grid lines
+        // TODO: refactor this to a custom library overwrite.
+       [lineStyle setLineStyleInContext:context];
+       [lineStyle strokePathInContext:context];
     }
 }
 
