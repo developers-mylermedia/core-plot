@@ -1687,8 +1687,27 @@ NSDecimal CPTNiceLength(NSDecimal length)
             }
         }
 
+        // This sets the eligment to left on the labels.
+        CPTMutableTextStyle *leftTextStyle = [CPTMutableTextStyle textStyleWithStyle:((CPTTextLayer *)newAxisLabel.contentLayer).textStyle];
+        [leftTextStyle setTextAlignment:CPTTextAlignmentLeft];
+        ((CPTTextLayer *)newAxisLabel.contentLayer).textStyle = leftTextStyle;
+
         lastLayer        = newAxisLabel.contentLayer;
         lastLayer.shadow = theShadow;
+
+        // Also increase the label size as otherwise the left alignment doesn't works.
+        CGFloat labelWidth = axisTitle.contentLayer.frame.size.width;
+        // This makes sure the labelWidth is big enough
+        if (labelWidth < 1) {
+            labelWidth = 28;
+        } else if (labelWidth < newAxisLabel.contentLayer.bounds.size.width) {
+            labelWidth = newAxisLabel.contentLayer.bounds.size.width;
+        }
+        [newAxisLabel.contentLayer setBounds:CGRectMake(newAxisLabel.contentLayer.bounds.origin.x,
+                                                        newAxisLabel.contentLayer.bounds.origin.y,
+                                                        labelWidth,
+                                                        newAxisLabel.contentLayer.bounds.size.height)];
+
 
         [newAxisLabels addObject:newAxisLabel];
     }
