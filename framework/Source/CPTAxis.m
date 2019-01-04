@@ -18,6 +18,8 @@
 #import "CPTTextLayer.h"
 #import "CPTUtilities.h"
 #import "NSCoderExtensions.h"
+#import "CPTMutableTextStyle.h"
+#import "CPTTextStyle.h"
 
 /** @defgroup axisAnimation Axes
  *  @brief Axis properties that can be animated using Core Animation.
