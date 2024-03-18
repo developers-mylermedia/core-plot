@@ -10,6 +10,7 @@ static const BOOL kUseHorizontalBars = NO;
 @interface VerticalBarChart()
 
 @property (nonatomic, readwrite, strong, nullable) CPTPlotSpaceAnnotation *symbolTextAnnotation;
+
 @end
 
 @implementation VerticalBarChart
@@ -23,7 +24,7 @@ static const BOOL kUseHorizontalBars = NO;
 
 -(nonnull instancetype)init
 {
-    if ( (self = [super init]) ) {
+    if ((self = [super init])) {
         self.title   = @"Vertical Bar Chart";
         self.section = kBarPlots;
     }
@@ -50,7 +51,7 @@ static const BOOL kUseHorizontalBars = NO;
 {
 }
 
--(void)renderInGraphHostingView:(nonnull CPTGraphHostingView *)hostingView withTheme:(nullable CPTTheme *)theme animated:(BOOL)animated
+-(void)renderInGraphHostingView:(nonnull CPTGraphHostingView *)hostingView withTheme:(nullable CPTTheme *)theme animated:(BOOL __unused)animated
 {
 #if TARGET_OS_SIMULATOR || TARGET_OS_IPHONE
     CGRect bounds = hostingView.bounds;
@@ -130,7 +131,7 @@ static const BOOL kUseHorizontalBars = NO;
     {
         y.majorIntervalLength   = (kUseHorizontalBars ? @1.0 : @10.0);
         y.minorTicksPerInterval = (kUseHorizontalBars ? 0 : 9);
-        y.orthogonalPosition    = ( kUseHorizontalBars ? @0.0 : @(-0.5) );
+        y.orthogonalPosition    = (kUseHorizontalBars ? @0.0 : @(-0.5));
 
         y.preferredNumberOfMajorTicks = 8;
         y.majorGridLineStyle          = majorGridLineStyle;
@@ -211,7 +212,7 @@ static const BOOL kUseHorizontalBars = NO;
     theLegend.fill            = [CPTFill fillWithColor:[CPTColor colorWithGenericGray:CPTFloat(0.15)]];
     theLegend.borderLineStyle = barLineStyle;
     theLegend.cornerRadius    = textSize * CPTFloat(0.25);
-    theLegend.swatchSize      = CGSizeMake( textSize * CPTFloat(0.75), textSize * CPTFloat(0.75) );
+    theLegend.swatchSize      = CGSizeMake(textSize * CPTFloat(0.75), textSize * CPTFloat(0.75));
     whiteTextStyle.fontSize   = textSize * CPTFloat(0.5);
     theLegend.textStyle       = whiteTextStyle;
     theLegend.rowMargin       = textSize * CPTFloat(0.25);
@@ -226,7 +227,7 @@ static const BOOL kUseHorizontalBars = NO;
     CPTPlotSpaceAnnotation *legendAnnotation = [[CPTPlotSpaceAnnotation alloc] initWithPlotSpace:barPlotSpace anchorPlotPoint:plotPoint];
     legendAnnotation.contentLayer = theLegend;
 
-    legendAnnotation.contentAnchorPoint = ( kUseHorizontalBars ? CGPointMake(1.0, 0.0) : CGPointMake(0.0, 1.0) );
+    legendAnnotation.contentAnchorPoint = (kUseHorizontalBars ? CGPointMake(1.0, 0.0) : CGPointMake(0.0, 1.0));
 
     [graph.plotAreaFrame.plotArea addAnnotation:legendAnnotation];
 }
@@ -287,7 +288,7 @@ static const BOOL kUseHorizontalBars = NO;
 #pragma mark -
 #pragma mark Plot Data Source Methods
 
--(NSUInteger)numberOfRecordsForPlot:(nonnull CPTPlot *)plot
+-(NSUInteger)numberOfRecordsForPlot:(nonnull CPTPlot *__unused)plot
 {
     return 10;
 }
@@ -306,7 +307,7 @@ static const BOOL kUseHorizontalBars = NO;
             num = @(index);
         }
         else {
-            num = @( (index + 1) * (index + 1) );
+            num = @((index + 1) * (index + 1));
         }
     }
     else {

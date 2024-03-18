@@ -47,10 +47,10 @@
 #pragma mark -
 #pragma mark Segues
 
--(void)prepareForSegue:(nonnull UIStoryboardSegue *)segue sender:(nullable id)sender
+-(void)prepareForSegue:(nonnull UIStoryboardSegue *)segue sender:(nullable id __unused)sender
 {
     if ( [segue.identifier isEqualToString:@"showDetail"] ) {
-        DetailViewController *controller = (DetailViewController *)( (UINavigationController *)segue.destinationViewController ).topViewController;
+        DetailViewController *controller = (DetailViewController *)((UINavigationController *)segue.destinationViewController).topViewController;
 
         controller.navigationItem.leftBarButtonItem             = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
@@ -74,6 +74,7 @@
     NSDictionary<NSString *, NSString *> *themeInfo = notification.userInfo;
 
     NSString *themeName = themeInfo[PlotGalleryThemeNameKey];
+
     if ( themeName ) {
         self.currentThemeName = themeName;
     }
@@ -82,12 +83,12 @@
 #pragma mark -
 #pragma mark Table view data source
 
--(NSInteger)numberOfSectionsInTableView:(nonnull UITableView *)tv
+-(NSInteger)numberOfSectionsInTableView:(nonnull UITableView *__unused)tv
 {
     return (NSInteger)[PlotGallery sharedPlotGallery].numberOfSections;
 }
 
--(NSInteger)tableView:(nonnull UITableView *)tv numberOfRowsInSection:(NSInteger)section
+-(NSInteger)tableView:(nonnull UITableView *__unused)tv numberOfRowsInSection:(NSInteger)section
 {
     return (NSInteger)[[PlotGallery sharedPlotGallery] numberOfRowsInSection:(NSUInteger)section];
 }
@@ -111,7 +112,7 @@
     return cell;
 }
 
--(nullable NSString *)tableView:(nonnull UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+-(nullable NSString *)tableView:(nonnull UITableView *__unused)tableView titleForHeaderInSection:(NSInteger)section
 {
     return [PlotGallery sharedPlotGallery].sectionTitles[(NSUInteger)section];
 }

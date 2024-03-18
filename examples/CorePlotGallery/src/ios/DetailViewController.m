@@ -51,7 +51,7 @@
 
 -(nonnull instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil
 {
-    if ( (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) ) {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         [self setupView];
     }
 
@@ -134,6 +134,7 @@
     NSDictionary<NSString *, NSString *> *themeInfo = notification.userInfo;
 
     NSString *themeName = themeInfo[PlotGalleryThemeNameKey];
+
     if ( themeName ) {
         [self themeSelectedWithName:themeName];
     }

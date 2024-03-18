@@ -11,13 +11,13 @@
 
 -(nonnull instancetype)initWithFrame:(NSRect)frame
 {
-    if ( (self = [super initWithFrame:frame]) ) {
+    if ((self = [super initWithFrame:frame])) {
     }
 
     return self;
 }
 
--(void)drawRect:(NSRect)dirtyRect
+-(void)drawRect:(NSRect __unused)dirtyRect
 {
 }
 
